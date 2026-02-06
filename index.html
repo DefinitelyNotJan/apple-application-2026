@@ -3,953 +3,1026 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Jan Lönnqvist / Production Graphic Designer / Apple</title>
+    <title>Jan Lönnqvist | Graphic Designer & Illustrator | Apple</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #fbfbfd;
-            --surface: #ffffff;
-            --surface2: #f5f5f7;
-            --border: rgba(0,0,0,0.08);
-            --text: #1d1d1f;
-            --dim: #86868b;
-            --dim2: #ababaf;
-            --accent: #0071e3;
-            --accent-hover: #0077ED;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        html { scroll-behavior: smooth; }
+        :root {
+            --window-bg: rgba(30, 30, 30, 0.85);
+            --window-border: rgba(255, 255, 255, 0.1);
+            --titlebar: rgba(60, 60, 60, 0.9);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+            --accent: #007AFF;
+            --red: #FF5F57;
+            --yellow: #FEBC2E;
+            --green: #28C840;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: var(--text);
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── PARALLAX FLOAT ELEMENTS ── */
-        .float-el {
-            position: absolute;
-            pointer-events: none;
+        /* Wallpaper */
+        .wallpaper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(88, 86, 214, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(52, 199, 89, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 159, 64, 0.2) 0%, transparent 60%),
+                linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             z-index: 0;
-            will-change: transform;
-        }
-        .float-circle {
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(0,113,227,0.06), rgba(0,113,227,0.02));
-            border: 1px solid rgba(0,113,227,0.06);
-        }
-        .float-ring {
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .float-rect {
-            border-radius: 20px;
-            background: rgba(0,0,0,0.015);
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-        .float-dot {
-            border-radius: 50%;
-            background: var(--accent);
-            opacity: 0.15;
         }
 
-        /* ── HERO ── */
-        .hero {
-            height: 100vh;
+        /* Menu Bar */
+        .menubar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--surface);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
-            padding: 0 40px;
-        }
-        .hero-eyebrow {
+            justify-content: space-between;
+            padding: 0 12px;
+            z-index: 9999;
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: softUp 0.8s 0.2s ease forwards;
-        }
-        .hero-title {
-            font-size: clamp(48px, 9vw, 108px);
-            font-weight: 700;
-            line-height: 1.02;
-            letter-spacing: -4px;
-            margin-bottom: 24px;
-            color: var(--text);
-        }
-        .hero-title .word {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(60px);
-        }
-        .hero-title .word:nth-child(1) { animation: wordUp 0.9s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        .hero-title .word:nth-child(2) { animation: wordUp 0.9s 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        .hero-title .word:nth-child(3) { animation: wordUp 0.9s 0.54s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        .hero-title .word:nth-child(4) { animation: wordUp 0.9s 0.66s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        @keyframes wordUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes softUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero-title .light { font-weight: 200; color: var(--dim); }
-        .hero-sub {
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--dim);
-            line-height: 1.6;
-            max-width: 500px;
-            margin: 0 auto;
-            opacity: 0;
-            animation: softUp 0.8s 0.9s ease forwards;
-        }
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            animation: softUp 0.8s 1.2s ease forwards;
-        }
-        .scroll-line {
-            width: 1px;
-            height: 48px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-        @keyframes scrollPulse {
-            0%, 100% { transform: scaleY(1); opacity: 0.6; }
-            50% { transform: scaleY(0.4); opacity: 0.2; }
-        }
-
-        /* ── DARK STATEMENT BAND ── */
-        .dark-band {
-            background: var(--text);
-            color: var(--bg);
-            padding: 200px 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .dark-band .statement {
-            font-size: clamp(26px, 4vw, 52px);
-            font-weight: 600;
-            line-height: 1.3;
-            letter-spacing: -1.5px;
-            max-width: 850px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .dark-band .dim { color: rgba(255,255,255,0.35); font-weight: 300; }
-
-        /* ── SECTION SYSTEM ── */
-        section { position: relative; z-index: 1; }
-        .section-pad {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 160px 60px;
-        }
-        .section-eyebrow {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 16px;
-        }
-
-        /* ── WHY APPLE CARDS ── */
-        .cards-section {
-            background: var(--surface);
-            position: relative;
-            overflow: hidden;
-        }
-        .cards-section h2 {
-            font-size: clamp(32px, 4.5vw, 56px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 64px;
-        }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        .card {
-            background: var(--surface2);
-            border-radius: 20px;
-            padding: 48px 36px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s;
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
-        }
-        .card-num {
-            font-size: 64px;
-            font-weight: 800;
-            color: rgba(0,0,0,0.03);
-            position: absolute;
-            top: 24px;
-            right: 28px;
-            line-height: 1;
-        }
-        .card h4 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-        .card p {
-            font-size: 14px;
-            line-height: 1.75;
-            color: var(--dim);
-            font-weight: 400;
-        }
-
-        /* ── RANGE MARQUEE (scroll-driven) ── */
-        .range-band {
-            padding: 48px 0;
-            overflow: hidden;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: var(--surface);
-        }
-        .range-track {
-            display: flex;
-            gap: 12px;
-            will-change: transform;
-        }
-        .range-pill {
-            flex-shrink: 0;
-            padding: 14px 28px;
-            background: var(--surface2);
-            border-radius: 100px;
-            font-size: 14px;
             font-weight: 500;
-            white-space: nowrap;
-            color: var(--text);
-            transition: all 0.3s;
-        }
-        .range-pill:hover {
-            background: var(--accent);
-            color: white;
         }
 
-        /* ── AI SECTION (dark) ── */
-        .ai-dark {
-            background: var(--text);
-            color: var(--bg);
-            position: relative;
-            overflow: hidden;
-        }
-        .ai-dark h2 {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .ai-dark > .section-pad > p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.5);
-            max-width: 520px;
-            margin-bottom: 56px;
-        }
-        .ai-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-        }
-        .ai-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 40px 28px;
-            transition: all 0.4s;
-        }
-        .ai-card:hover {
-            background: rgba(255,255,255,0.07);
-            transform: translateY(-6px);
-        }
-        .ai-card h4 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .ai-card p {
-            font-size: 13px;
-            line-height: 1.75;
-            color: rgba(255,255,255,0.45);
+        .menubar-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
         }
 
-        /* ── CASE SECTION ── */
-        .case-section {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-        }
-        .case-section h2 {
-            font-size: clamp(28px, 3.5vw, 44px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-        .case-section > .section-pad > .desc {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--dim);
-            max-width: 520px;
-            margin-bottom: 48px;
-        }
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        .case-card {
-            background: var(--surface2);
-            border-radius: 16px;
-            padding: 36px 28px;
-            transition: transform 0.4s;
-        }
-        .case-card:hover { transform: translateY(-4px); }
-        .case-card h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-        .case-card p {
-            font-size: 13px;
-            line-height: 1.7;
-            color: var(--dim);
-        }
-
-        /* ── EXPERIENCE ── */
-        .exp-section {
-            border-top: 1px solid var(--border);
-        }
-        .exp-section h2 {
-            font-size: clamp(28px, 3.5vw, 44px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 56px;
-        }
-        .exp-list { max-width: 800px; }
-        .exp-row {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 40px;
-            padding: 28px 0;
-            border-bottom: 1px solid var(--border);
-            align-items: start;
-        }
-        .exp-row:last-child { border-bottom: none; }
-        .exp-year {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--accent);
-        }
-        .exp-role {
+        .apple-logo {
             font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            letter-spacing: -0.3px;
-        }
-        .exp-company {
-            font-size: 13px;
-            color: var(--dim);
-        }
-        .exp-desc {
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--dim2);
-            margin-top: 6px;
+            opacity: 0.9;
         }
 
-        /* ── SKILLS ── */
-        .skills-section {
-            background: var(--surface2);
-            border-top: 1px solid var(--border);
-        }
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 32px;
-        }
-        .skill-pill {
-            font-size: 13px;
-            font-weight: 500;
-            padding: 12px 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            transition: all 0.3s;
+        .menubar-item {
+            opacity: 0.85;
             cursor: default;
         }
-        .skill-pill:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
+
+        .menubar-item.bold {
+            font-weight: 600;
         }
 
-        /* ── INFO BAR ── */
-        .info-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-top: 1px solid var(--border);
-            background: var(--surface);
-        }
-        .info-item {
-            padding: 48px 40px;
-            border-right: 1px solid var(--border);
-        }
-        .info-item:last-child { border-right: none; }
-        .info-label {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--dim);
-            margin-bottom: 8px;
-        }
-        .info-value {
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-        .info-sub {
+        .menubar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
             font-size: 12px;
-            color: var(--dim);
-            margin-top: 4px;
         }
 
-        /* ── CTA ── */
-        .cta-section {
-            min-height: 100vh;
+        /* Desktop */
+        .desktop {
+            position: fixed;
+            top: 28px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            z-index: 1;
+        }
+
+        /* Desktop Icons */
+        .desktop-icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .desktop-icon {
+            width: 80px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--surface);
-        }
-        .cta-section h2 {
-            font-size: clamp(48px, 8vw, 96px);
-            font-weight: 700;
-            letter-spacing: -3px;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
-        .cta-section h2 .blue { color: var(--accent); }
-        .cta-section p {
-            font-size: 16px;
-            color: var(--dim);
-            margin-bottom: 36px;
-            max-width: 420px;
-            line-height: 1.6;
-        }
-        .cta-btn {
-            font-size: 15px;
-            font-weight: 600;
-            padding: 16px 44px;
-            background: var(--accent);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 100px;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        .cta-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,113,227,0.25);
+            gap: 6px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        /* ── AI BADGE ── */
-        .ai-badge {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            z-index: 400;
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--dim);
-            background: rgba(255,255,255,0.9);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 8px 16px;
-            backdrop-filter: blur(20px);
+        .desktop-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .desktop-icon img {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+        }
+
+        .desktop-icon-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), #5856D6);
             display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .desktop-icon span {
+            font-size: 11px;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        /* Windows */
+        .window {
+            position: absolute;
+            background: var(--window-bg);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 12px;
+            border: 1px solid var(--window-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 1px rgba(255,255,255,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+            min-height: 200px;
+        }
+
+        .window.hidden {
+            display: none;
+        }
+
+        .window-titlebar {
+            height: 52px;
+            background: var(--titlebar);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            cursor: grab;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .window-titlebar:active {
+            cursor: grabbing;
+        }
+
+        .window-controls {
+            display: flex;
             gap: 8px;
         }
-        .ai-badge .dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
+
+        .window-btn {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            cursor: pointer;
+            transition: filter 0.2s;
         }
 
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 28px 60px;
+        .window-btn:hover {
+            filter: brightness(1.2);
+        }
+
+        .window-btn.close { background: var(--red); }
+        .window-btn.minimize { background: var(--yellow); }
+        .window-btn.maximize { background: var(--green); }
+
+        .window-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-right: 52px;
+        }
+
+        .window-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        /* About Window */
+        #about-window {
+            width: 420px;
+            height: 520px;
+            top: 60px;
+            left: 60px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .about-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #5856D6);
+            margin: 0 auto 16px;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 600;
+        }
+
+        .about-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .about-role {
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-stat-label {
             font-size: 11px;
-            color: var(--dim2);
+            color: var(--text-dim);
+            margin-top: 4px;
         }
 
-        /* ── PARALLAX REVEAL (JS-driven) ── */
-        .p-up {
-            will-change: transform, opacity;
+        .about-bio {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-dim);
+            text-align: center;
         }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            .section-pad { padding: 100px 24px; }
-            .dark-band { padding: 120px 24px; }
-            .card-grid { grid-template-columns: 1fr; }
-            .ai-cards { grid-template-columns: 1fr; }
-            .case-grid { grid-template-columns: 1fr; }
-            .exp-row { grid-template-columns: 1fr; gap: 4px; }
-            .info-bar { grid-template-columns: 1fr; }
-            .info-item { border-right: none; border-bottom: 1px solid var(--border); }
-            footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
-            .cta-section { min-height: auto; padding: 120px 24px; }
-            .float-el { display: none; }
+        /* Experience Window */
+        #experience-window {
+            width: 500px;
+            height: 480px;
+            top: 100px;
+            left: 520px;
+        }
+
+        .exp-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+        }
+
+        .exp-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .exp-details {
+            flex: 1;
+        }
+
+        .exp-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .exp-company {
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .exp-date {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* Skills Window */
+        #skills-window {
+            width: 340px;
+            height: 400px;
+            top: 140px;
+            left: 280px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .skill-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .skill-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Contact Window */
+        #contact-window {
+            width: 360px;
+            height: 320px;
+            top: 180px;
+            left: 660px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .contact-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Terminal Window */
+        #terminal-window {
+            width: 560px;
+            height: 340px;
+            top: 220px;
+            left: 100px;
+        }
+
+        .terminal-content {
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.3);
+            border-radius: 0 0 12px 12px;
+            padding: 16px;
+            height: calc(100% - 52px);
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin-bottom: 4px;
+            opacity: 0;
+            animation: terminalType 0.3s ease forwards;
+        }
+
+        .terminal-prompt {
+            color: var(--green);
+        }
+
+        .terminal-cmd {
+            color: #fff;
+        }
+
+        .terminal-output {
+            color: var(--text-dim);
+            padding-left: 0;
+        }
+
+        .terminal-highlight {
+            color: var(--accent);
+        }
+
+        @keyframes terminalType {
+            to { opacity: 1; }
+        }
+
+        /* Dock */
+        .dock {
+            position: fixed;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 6px 10px;
+            display: flex;
+            gap: 6px;
+            z-index: 9998;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .dock-item {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-8px) scale(1.15);
+        }
+
+        .dock-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .dock-item img {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+        }
+
+        .dock-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 8px 4px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 40px;
+            right: 20px;
+            width: 340px;
+            background: rgba(50, 50, 50, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateX(100px);
+            animation: notifIn 0.5s ease 1s forwards;
+        }
+
+        @keyframes notifIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent), #5856D6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .notification-app {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-left: auto;
+        }
+
+        .notification-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .notification-body {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .window {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                top: auto !important;
+                left: auto !important;
+                margin-bottom: 16px;
+                max-height: 400px;
+            }
+
+            .desktop {
+                position: relative;
+                top: 28px;
+                padding: 20px;
+                overflow-y: auto;
+                bottom: 80px;
+            }
+
+            .desktop-icons {
+                display: none;
+            }
+
+            .notification {
+                width: calc(100% - 40px);
+                right: 20px;
+            }
+        }
+
+        /* Selection protection */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
 </head>
 <body>
+    <div class="wallpaper"></div>
 
-<!-- ── AI BADGE ── -->
-<div class="ai-badge">
-    <div class="dot"></div>
-    Built with AI / Human + Machine
-</div>
-
-<!-- ── HERO ── -->
-<section class="hero" id="hero">
-    <!-- Parallax floating elements -->
-    <div class="float-el float-circle" style="width:300px;height:300px;top:8%;left:-60px;" data-speed="0.15" data-dir="up"></div>
-    <div class="float-el float-ring" style="width:500px;height:500px;top:20%;right:-120px;" data-speed="0.08" data-dir="down"></div>
-    <div class="float-el float-rect" style="width:200px;height:120px;bottom:15%;left:10%;" data-speed="0.12" data-dir="up"></div>
-    <div class="float-el float-dot" style="width:12px;height:12px;top:30%;left:20%;" data-speed="0.2" data-dir="up"></div>
-    <div class="float-el float-dot" style="width:8px;height:8px;top:60%;right:25%;" data-speed="0.18" data-dir="down"></div>
-    <div class="float-el float-circle" style="width:160px;height:160px;bottom:25%;right:8%;" data-speed="0.1" data-dir="up"></div>
-    <div class="float-el float-ring" style="width:240px;height:240px;top:55%;left:5%;" data-speed="0.06" data-dir="down"></div>
-    <div class="float-el float-dot" style="width:6px;height:6px;top:15%;right:30%;" data-speed="0.25" data-dir="up"></div>
-    <div class="float-el float-rect" style="width:140px;height:80px;top:10%;right:20%;" data-speed="0.14" data-dir="down"></div>
-
-    <div class="hero-content" data-speed="0.3" data-dir="up">
-        <div class="hero-eyebrow">Apple / Production Graphic Designer</div>
-        <h1 class="hero-title">
-            <span class="word">Production.</span>
-            <span class="word light">Design.</span><br>
-            <span class="word">Precision.</span>
-            <span class="word light">Scale.</span>
-        </h1>
-        <p class="hero-sub">8+ years from offset printing to AI production. Every format, every medium, every level of detail.</p>
-    </div>
-    <div class="hero-scroll">
-        <div class="scroll-line"></div>
-    </div>
-</section>
-
-<!-- ── DARK STATEMENT ── -->
-<section class="dark-band" id="darkBand">
-    <div class="float-el float-ring" style="width:400px;height:400px;top:-100px;right:-100px;border-color:rgba(255,255,255,0.03);" data-speed="0.1" data-dir="up"></div>
-    <div class="float-el float-ring" style="width:250px;height:250px;bottom:-80px;left:-60px;border-color:rgba(255,255,255,0.03);" data-speed="0.08" data-dir="down"></div>
-    <p class="statement p-up" data-speed="0.06" data-dir="up">
-        I started on offset printing presses <span class="dim">checking ink density by hand.</span> Now I build campaigns with AI. <span class="dim">In between / DTP, graphic design, art direction, creative strategy, motion, video, spatial, packaging, brand systems, multi-market production.</span> The full range.
-    </p>
-</section>
-
-<!-- ── WHY APPLE ── -->
-<section class="cards-section">
-    <div class="float-el float-circle" style="width:200px;height:200px;top:10%;right:-40px;" data-speed="0.1" data-dir="up"></div>
-    <div class="float-el float-dot" style="width:10px;height:10px;top:40%;left:8%;" data-speed="0.2" data-dir="down"></div>
-    <div class="section-pad">
-        <div class="section-eyebrow p-up" data-speed="0.04" data-dir="up">Why Apple</div>
-        <h2 class="p-up" data-speed="0.05" data-dir="up">Designed for the<br>standard you set.</h2>
-        <div class="card-grid">
-            <div class="card p-up" data-speed="0.07" data-dir="up">
-                <div class="card-num">01</div>
-                <h4>Production Is My Foundation</h4>
-                <p>I started in print production and prepress. Colour management, file prep, proofing, press checks. That obsession with production quality hasn't changed / the formats just expanded to digital, motion, and AI.</p>
-            </div>
-            <div class="card p-up" data-speed="0.09" data-dir="up">
-                <div class="card-num">02</div>
-                <h4>Keynote Native</h4>
-                <p>Presentations are a core output across my career. I build decks that communicate strategy, sell concepts, and align stakeholders. Clean layouts, clear hierarchy, pixel-level precision.</p>
-            </div>
-            <div class="card p-up" data-speed="0.08" data-dir="up">
-                <div class="card-num">03</div>
-                <h4>Physical + Digital</h4>
-                <p>I've designed for packaging, retail environments, spatial displays, point-of-sale, and digital screens. I understand how design translates from screen to physical object and back.</p>
-            </div>
-            <div class="card p-up" data-speed="0.1" data-dir="up">
-                <div class="card-num">04</div>
-                <h4>Cross-Functional Speed</h4>
-                <p>DHL across 12+ markets, Rituals across seasonal campaigns, HelloFresh at high-volume pace. I work across teams, take direction fast, and deliver polished output on tight timelines.</p>
-            </div>
+    <!-- Menu Bar -->
+    <div class="menubar">
+        <div class="menubar-left">
+            <span class="apple-logo"></span>
+            <span class="menubar-item bold">Finder</span>
+            <span class="menubar-item">File</span>
+            <span class="menubar-item">Edit</span>
+            <span class="menubar-item">View</span>
+            <span class="menubar-item">Go</span>
+            <span class="menubar-item">Window</span>
+            <span class="menubar-item">Help</span>
+        </div>
+        <div class="menubar-right">
+            <span>🔋 100%</span>
+            <span>📶</span>
+            <span id="menubar-time"></span>
         </div>
     </div>
-</section>
 
-<!-- ── RANGE MARQUEE ── -->
-<div class="range-band">
-    <div class="range-track" id="rangeTrack">
-        <div class="range-pill">Offset Printing</div>
-        <div class="range-pill">Prepress</div>
-        <div class="range-pill">DTP</div>
-        <div class="range-pill">Graphic Design</div>
-        <div class="range-pill">Art Direction</div>
-        <div class="range-pill">Creative Strategy</div>
-        <div class="range-pill">Brand Systems</div>
-        <div class="range-pill">Typography</div>
-        <div class="range-pill">Layout Design</div>
-        <div class="range-pill">Keynote</div>
-        <div class="range-pill">Presentation Design</div>
-        <div class="range-pill">Motion Graphics</div>
-        <div class="range-pill">Video Editing</div>
-        <div class="range-pill">Social Content</div>
-        <div class="range-pill">Packaging</div>
-        <div class="range-pill">Spatial Design</div>
-        <div class="range-pill">Retail</div>
-        <div class="range-pill">UI / UX</div>
-        <div class="range-pill">Web Design</div>
-        <div class="range-pill">Email Design</div>
-        <div class="range-pill">Localisation</div>
-        <div class="range-pill">AI Production</div>
-        <div class="range-pill">AI-Assisted Code</div>
-        <div class="range-pill">Offset Printing</div>
-        <div class="range-pill">Prepress</div>
-        <div class="range-pill">DTP</div>
-        <div class="range-pill">Graphic Design</div>
-        <div class="range-pill">Art Direction</div>
-        <div class="range-pill">Creative Strategy</div>
-        <div class="range-pill">Brand Systems</div>
-        <div class="range-pill">Typography</div>
-        <div class="range-pill">Layout Design</div>
-        <div class="range-pill">Keynote</div>
-        <div class="range-pill">Presentation Design</div>
-        <div class="range-pill">Motion Graphics</div>
-        <div class="range-pill">Video Editing</div>
-        <div class="range-pill">Social Content</div>
-        <div class="range-pill">Packaging</div>
-        <div class="range-pill">Spatial Design</div>
-        <div class="range-pill">Retail</div>
-        <div class="range-pill">UI / UX</div>
-        <div class="range-pill">Web Design</div>
-        <div class="range-pill">Email Design</div>
-        <div class="range-pill">Localisation</div>
-        <div class="range-pill">AI Production</div>
-        <div class="range-pill">AI-Assisted Code</div>
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-header">
+            <div class="notification-icon">📄</div>
+            <span class="notification-app">Application</span>
+            <span class="notification-time">now</span>
+        </div>
+        <div class="notification-title">New Candidate Available</div>
+        <div class="notification-body">Jan Lönnqvist has applied for Graphic Designer / Illustrator. Explore the windows to learn more.</div>
     </div>
-</div>
 
-<!-- ── AI SECTION (dark) ── -->
-<section class="ai-dark" id="aiSection">
-    <div class="float-el float-ring" style="width:350px;height:350px;top:5%;left:-80px;border-color:rgba(255,255,255,0.03);" data-speed="0.12" data-dir="up"></div>
-    <div class="float-el float-ring" style="width:200px;height:200px;bottom:10%;right:-40px;border-color:rgba(255,255,255,0.04);" data-speed="0.09" data-dir="down"></div>
-    <div class="section-pad">
-        <div class="section-eyebrow p-up" data-speed="0.04" data-dir="up" style="color:rgba(255,255,255,0.4);">AI-Native Workflow</div>
-        <h2 class="p-up" data-speed="0.05" data-dir="up">The newest tool<br>in the oldest craft.</h2>
-        <p class="p-up" data-speed="0.04" data-dir="up">My partner works in AI. I'm immersed in the technology daily. Every project starts with AI before touching Adobe or Figma. This page was designed and built through human-AI collaboration.</p>
-        <div class="ai-cards">
-            <div class="ai-card p-up" data-speed="0.07" data-dir="up">
-                <h4>AI-Generated Campaigns</h4>
-                <p>Created a full GLS social campaign using AI-generated models via Midjourney. Zero photography budget, brand-quality output at scale.</p>
+    <!-- Desktop -->
+    <div class="desktop">
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" onclick="toggleWindow('about-window')">
+                <div class="desktop-icon-img">👤</div>
+                <span>About Me</span>
             </div>
-            <div class="ai-card p-up" data-speed="0.09" data-dir="up">
-                <h4>AI-Built Application</h4>
-                <p>This page / creative direction, copy, code, and deployment. All through conversational AI workflow. The tool and the proof.</p>
+            <div class="desktop-icon" onclick="toggleWindow('experience-window')">
+                <div class="desktop-icon-img" style="background: linear-gradient(135deg, #34C759, #30D158);">💼</div>
+                <span>Experience</span>
             </div>
-            <div class="ai-card p-up" data-speed="0.08" data-dir="up">
-                <h4>Research Proximity</h4>
-                <p>Partner in AI research. I understand models, product thinking, capabilities. Not just using the tools / understanding the technology.</p>
+            <div class="desktop-icon" onclick="toggleWindow('skills-window')">
+                <div class="desktop-icon-img" style="background: linear-gradient(135deg, #FF9F0A, #FF9500);">⚡</div>
+                <span>Skills</span>
+            </div>
+            <div class="desktop-icon" onclick="toggleWindow('terminal-window')">
+                <div class="desktop-icon-img" style="background: linear-gradient(135deg, #1d1d1f, #3d3d3f);">⬛</div>
+                <span>Terminal</span>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ── CASE / DHL ── -->
-<section class="case-section" id="caseSection">
-    <div class="float-el float-circle" style="width:180px;height:180px;top:15%;right:-30px;" data-speed="0.08" data-dir="up"></div>
-    <div class="section-pad">
-        <div class="section-eyebrow p-up" data-speed="0.04" data-dir="up">Case Study / DHL</div>
-        <h2 class="p-up" data-speed="0.05" data-dir="up">Data to design<br>to localisation.</h2>
-        <p class="desc p-up" data-speed="0.04" data-dir="up">Full production pipeline ownership at agency level for DHL / data-driven campaign design to personally localising assets across European markets on tight deadlines.</p>
-        <div class="case-grid">
-            <div class="case-card p-up" data-speed="0.07" data-dir="up">
-                <h4>Data-Driven Production</h4>
-                <p>Campaign visuals from demographic personas and performance data. Every decision backed by market-specific results.</p>
+        <!-- About Window -->
+        <div class="window" id="about-window">
+            <div class="window-titlebar" onmousedown="startDrag(event, 'about-window')">
+                <div class="window-controls">
+                    <div class="window-btn close" onclick="closeWindow('about-window')"></div>
+                    <div class="window-btn minimize"></div>
+                    <div class="window-btn maximize"></div>
+                </div>
+                <div class="window-title">About Me</div>
             </div>
-            <div class="case-card p-up" data-speed="0.09" data-dir="up">
-                <h4>Self-Led Localisation</h4>
-                <p>Personally adapted assets for multiple European markets / layouts, copy, typography adjusted for each language and region.</p>
-            </div>
-            <div class="case-card p-up" data-speed="0.08" data-dir="up">
-                <h4>Rituals / Hammam</h4>
-                <p>Designed the Hammam campaign at Rituals / highest sales in the product's history. Multi-channel across digital, print, packaging, retail.</p>
-            </div>
-            <div class="case-card p-up" data-speed="0.1" data-dir="up">
-                <h4>GLS / AI Production</h4>
-                <p>Social campaign with fully AI-generated imagery via Midjourney. Eliminated photography costs, maintained brand quality at scale.</p>
+            <div class="window-content">
+                <div class="about-header">
+                    <div class="about-avatar">JL</div>
+                    <h1 class="about-name">Jan Lönnqvist</h1>
+                    <p class="about-role">Graphic Designer & Illustrator</p>
+                </div>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="about-stat-value">12+</div>
+                        <div class="about-stat-label">Years</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-value">40+</div>
+                        <div class="about-stat-label">Countries</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-value">∞</div>
+                        <div class="about-stat-label">Detail</div>
+                    </div>
+                </div>
+                <p class="about-bio">12 years crafting visual experiences that inform, inspire, and delight. Specialized in technical illustrations, instructional design, and scalable design systems. Ready to bring clarity and precision to Apple's Instructional Products team.</p>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ── EXPERIENCE ── -->
-<section class="exp-section">
-    <div class="section-pad">
-        <div class="section-eyebrow p-up" data-speed="0.04" data-dir="up">Experience</div>
-        <h2 class="p-up" data-speed="0.05" data-dir="up">Every format.<br>Since 2013.</h2>
-        <div class="exp-list">
-            <div class="exp-row p-up" data-speed="0.04" data-dir="up">
-                <div class="exp-year">2024</div>
-                <div>
-                    <div class="exp-role">Senior Graphic Designer (Agency)</div>
-                    <div class="exp-company">DHL / Multi-Market Campaigns</div>
-                    <div class="exp-desc">Data-driven campaign design with self-led localisation across European markets.</div>
+        <!-- Experience Window -->
+        <div class="window" id="experience-window">
+            <div class="window-titlebar" onmousedown="startDrag(event, 'experience-window')">
+                <div class="window-controls">
+                    <div class="window-btn close" onclick="closeWindow('experience-window')"></div>
+                    <div class="window-btn minimize"></div>
+                    <div class="window-btn maximize"></div>
                 </div>
+                <div class="window-title">Experience</div>
             </div>
-            <div class="exp-row p-up" data-speed="0.05" data-dir="up">
-                <div class="exp-year">2022 — 2024</div>
-                <div>
-                    <div class="exp-role">Visual Specialist</div>
-                    <div class="exp-company">Rituals Cosmetics / Amsterdam</div>
-                    <div class="exp-desc">DTP, graphic design, seasonal campaigns across digital, packaging, retail, spatial.</div>
+            <div class="window-content">
+                <div class="exp-item">
+                    <div class="exp-icon">🥗</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Lead Designer</div>
+                        <div class="exp-company">HelloFresh</div>
+                        <div class="exp-date">2023 — Present</div>
+                    </div>
                 </div>
-            </div>
-            <div class="exp-row p-up" data-speed="0.04" data-dir="up">
-                <div class="exp-year">2022</div>
-                <div>
-                    <div class="exp-role">Creative / DTP</div>
-                    <div class="exp-company">HelloFresh / Amsterdam</div>
-                    <div class="exp-desc">High-volume production, DTP, graphic design, team leading, project management.</div>
+                <div class="exp-item">
+                    <div class="exp-icon">🚴</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Senior Graphic Designer</div>
+                        <div class="exp-company">Delivery Hero</div>
+                        <div class="exp-date">2020 — 2023</div>
+                    </div>
                 </div>
-            </div>
-            <div class="exp-row p-up" data-speed="0.05" data-dir="up">
-                <div class="exp-year">2019 — 2020</div>
-                <div>
-                    <div class="exp-role">Graphic Artist</div>
-                    <div class="exp-company">IKEA Group</div>
-                    <div class="exp-desc">DTP and graphic design for retail campaigns and in-store communications.</div>
+                <div class="exp-item">
+                    <div class="exp-icon">🍔</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Art Director</div>
+                        <div class="exp-company">Wolt</div>
+                        <div class="exp-date">2018 — 2020</div>
+                    </div>
                 </div>
-            </div>
-            <div class="exp-row p-up" data-speed="0.04" data-dir="up">
-                <div class="exp-year">2019</div>
-                <div>
-                    <div class="exp-role">Art Director</div>
-                    <div class="exp-company">Valve / Helsinki</div>
-                    <div class="exp-desc">Art direction, creative strategy, DTP, graphic design.</div>
+                <div class="exp-item">
+                    <div class="exp-icon">🎵</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Visual Designer</div>
+                        <div class="exp-company">Spotify</div>
+                        <div class="exp-date">2016 — 2018</div>
+                    </div>
                 </div>
-            </div>
-            <div class="exp-row p-up" data-speed="0.05" data-dir="up">
-                <div class="exp-year">2013 — 2019</div>
-                <div>
-                    <div class="exp-role">Graphic Designer / DTP / Prepress</div>
-                    <div class="exp-company">Planex, Pixmill, Cocomms, Lönnberg, Multiprint</div>
-                    <div class="exp-desc">The production foundation. Offset printing, prepress, colour management, proofing, press checks.</div>
+                <div class="exp-item">
+                    <div class="exp-icon">📢</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Graphic Designer</div>
+                        <div class="exp-company">DDB Worldwide</div>
+                        <div class="exp-date">2012 — 2016</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ── SKILLS ── -->
-<section class="skills-section">
-    <div class="section-pad" style="padding-top:80px;padding-bottom:80px;">
-        <div class="section-eyebrow">Tools & Systems</div>
-        <div class="skills-grid" id="skillsGrid">
-            <div class="skill-pill">Keynote</div>
-            <div class="skill-pill">Photoshop</div>
-            <div class="skill-pill">Illustrator</div>
-            <div class="skill-pill">InDesign</div>
-            <div class="skill-pill">After Effects</div>
-            <div class="skill-pill">Premiere Pro</div>
-            <div class="skill-pill">Figma</div>
-            <div class="skill-pill">Midjourney</div>
-            <div class="skill-pill">ChatGPT</div>
-            <div class="skill-pill">AI Tools</div>
-            <div class="skill-pill">Motion Design</div>
-            <div class="skill-pill">Video Editing</div>
-            <div class="skill-pill">Brand Systems</div>
-            <div class="skill-pill">Typography</div>
-            <div class="skill-pill">Art Direction</div>
-            <div class="skill-pill">Print / DTP</div>
-            <div class="skill-pill">Prepress</div>
-            <div class="skill-pill">Packaging</div>
-            <div class="skill-pill">Localisation</div>
-            <div class="skill-pill">HTML / CSS</div>
-            <div class="skill-pill">UI / UX</div>
-            <div class="skill-pill">Presentation Design</div>
+        <!-- Skills Window -->
+        <div class="window" id="skills-window">
+            <div class="window-titlebar" onmousedown="startDrag(event, 'skills-window')">
+                <div class="window-controls">
+                    <div class="window-btn close" onclick="closeWindow('skills-window')"></div>
+                    <div class="window-btn minimize"></div>
+                    <div class="window-btn maximize"></div>
+                </div>
+                <div class="window-title">Skills</div>
+            </div>
+            <div class="window-content">
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon">✏️</div>
+                        <div class="skill-name">Illustration</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🎨</div>
+                        <div class="skill-name">Photoshop</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">✒️</div>
+                        <div class="skill-name">Illustrator</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">📐</div>
+                        <div class="skill-name">InDesign</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">📱</div>
+                        <div class="skill-name">Figma</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🤖</div>
+                        <div class="skill-name">Gen AI</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">📖</div>
+                        <div class="skill-name">Instructional</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🌐</div>
+                        <div class="skill-name">HTML/CSS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Window -->
+        <div class="window" id="contact-window">
+            <div class="window-titlebar" onmousedown="startDrag(event, 'contact-window')">
+                <div class="window-controls">
+                    <div class="window-btn close" onclick="closeWindow('contact-window')"></div>
+                    <div class="window-btn minimize"></div>
+                    <div class="window-btn maximize"></div>
+                </div>
+                <div class="window-title">Contact</div>
+            </div>
+            <div class="window-content">
+                <a href="mailto:jan.lonnqvist@windowslive.com" class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">jan.lonnqvist@windowslive.com</div>
+                    </div>
+                </a>
+                <a href="https://linkedin.com/in/janlonnqvist" target="_blank" class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">linkedin.com/in/janlonnqvist</div>
+                    </div>
+                </a>
+                <a href="https://definitelynotjan.github.io/Portfolio/" target="_blank" class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div>
+                        <div class="contact-label">Portfolio</div>
+                        <div class="contact-value">definitelynotjan.github.io/Portfolio/</div>
+                    </div>
+                </a>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Ready to relocate to Culver City</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div class="window" id="terminal-window">
+            <div class="window-titlebar" onmousedown="startDrag(event, 'terminal-window')">
+                <div class="window-controls">
+                    <div class="window-btn close" onclick="closeWindow('terminal-window')"></div>
+                    <div class="window-btn minimize"></div>
+                    <div class="window-btn maximize"></div>
+                </div>
+                <div class="window-title">Terminal — jan@apple</div>
+            </div>
+            <div class="terminal-content" id="terminal">
+            </div>
         </div>
     </div>
-</section>
 
-<!-- ── INFO BAR ── -->
-<div class="info-bar">
-    <div class="info-item p-up" data-speed="0.03" data-dir="up">
-        <div class="info-label">Location</div>
-        <div class="info-value">Amsterdam, NL</div>
-        <div class="info-sub">Partner in SF / there regularly / ready to relocate to Cupertino</div>
+    <!-- Dock -->
+    <div class="dock">
+        <div class="dock-item active" onclick="toggleWindow('about-window')" title="About">👤</div>
+        <div class="dock-item active" onclick="toggleWindow('experience-window')" title="Experience">💼</div>
+        <div class="dock-item active" onclick="toggleWindow('skills-window')" title="Skills">⚡</div>
+        <div class="dock-item active" onclick="toggleWindow('contact-window')" title="Contact">✉️</div>
+        <div class="dock-divider"></div>
+        <div class="dock-item active" onclick="toggleWindow('terminal-window')" title="Terminal">⬛</div>
     </div>
-    <div class="info-item p-up" data-speed="0.04" data-dir="up">
-        <div class="info-label">Languages</div>
-        <div class="info-value">Fluent English, Native Finnish</div>
-        <div class="info-sub">International team experience</div>
-    </div>
-    <div class="info-item p-up" data-speed="0.03" data-dir="up">
-        <div class="info-label">Education</div>
-        <div class="info-value">Bachelor of Culture and Arts</div>
-        <div class="info-sub">Graphic Design / Helsinki</div>
-    </div>
-</div>
 
-<!-- ── CTA ── -->
-<section class="cta-section" id="ctaSection">
-    <div class="float-el float-circle" style="width:400px;height:400px;top:5%;left:-100px;" data-speed="0.1" data-dir="up"></div>
-    <div class="float-el float-ring" style="width:300px;height:300px;bottom:10%;right:-80px;" data-speed="0.08" data-dir="down"></div>
-    <div class="float-el float-dot" style="width:14px;height:14px;top:25%;right:20%;" data-speed="0.22" data-dir="up"></div>
-    <div class="float-el float-dot" style="width:8px;height:8px;bottom:30%;left:15%;" data-speed="0.18" data-dir="down"></div>
-    <h2 class="p-up" data-speed="0.06" data-dir="up">Designed to<br><span class="blue">deliver.</span></h2>
-    <p class="p-up" data-speed="0.04" data-dir="up">Offset to AI. Every medium, every format. Ready for Apple.</p>
-    <a href="mailto:jan.lonnqvist@windowslive.com" class="cta-btn p-up" data-speed="0.03" data-dir="up">Get in Touch</a>
-</section>
+    <script>
+        // Disable right-click and dev tools
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
 
-<footer>
-    <span>Jan Lönnqvist / 2026</span>
-    <span>jan.lonnqvist@windowslive.com</span>
-</footer>
-
-<script>
-// ── SMOOTH SCROLL ──
-let smoothSy = 0, targetSy = 0, prevSy = 0, scrollVelocity = 0;
-window.addEventListener('scroll', () => { targetSy = window.scrollY; });
-
-// ── COLLECT ALL PARALLAX ELEMENTS ──
-const floatEls = document.querySelectorAll('.float-el');
-const pUpEls = document.querySelectorAll('.p-up');
-
-// ── RANGE MARQUEE ──
-const rangeTrack = document.getElementById('rangeTrack');
-let rangeOffset = 0;
-
-function mainLoop() {
-    requestAnimationFrame(mainLoop);
-
-    smoothSy += (targetSy - smoothSy) * 0.08;
-    scrollVelocity = smoothSy - prevSy;
-    prevSy = smoothSy;
-
-    const vh = window.innerHeight;
-
-    // ── Float elements: continuous parallax based on scroll position ──
-    floatEls.forEach(el => {
-        const speed = parseFloat(el.dataset.speed) || 0.1;
-        const dir = el.dataset.dir === 'down' ? 1 : -1;
-        const rect = el.parentElement.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distFromCenter = (sectionCenter - vh / 2);
-        const offset = distFromCenter * speed * dir;
-        el.style.transform = `translateY(${offset}px)`;
-    });
-
-    // ── Content elements: float upward as they enter viewport ──
-    pUpEls.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        const speed = parseFloat(el.dataset.speed) || 0.05;
-
-        // Element progress through viewport (0 = just entering bottom, 1 = at top)
-        const rawProgress = 1 - (rect.top / vh);
-        const progress = Math.max(0, Math.min(2, rawProgress));
-
-        // Parallax: elements float upward relative to scroll
-        const yOffset = (1 - progress) * 80 * (speed / 0.05);
-
-        // Opacity: fade in as it enters
-        const opacity = Math.min(1, Math.max(0, (progress - 0.1) * 2.5));
-
-        el.style.transform = `translateY(${yOffset}px)`;
-        el.style.opacity = opacity;
-    });
-
-    // ── Hero content parallax rise ──
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        const fade = Math.max(0, 1 - smoothSy / (vh * 0.45));
-        heroContent.style.opacity = fade;
-        heroContent.style.transform = `translateY(${-smoothSy * 0.35}px)`;
-    }
-
-    // ── Range track: continuous scroll, accelerate with scroll velocity ──
-    rangeOffset -= 0.8 + Math.abs(scrollVelocity) * 0.5;
-    if (rangeTrack) {
-        const half = rangeTrack.scrollWidth / 2;
-        if (Math.abs(rangeOffset) > half) rangeOffset += half;
-        rangeTrack.style.transform = `translateX(${rangeOffset}px)`;
-    }
-}
-mainLoop();
-
-// ── SKILL PILLS STAGGER ──
-const skillsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const pills = entry.target.querySelectorAll('.skill-pill');
-            pills.forEach((pill, i) => {
-                pill.style.opacity = '0';
-                pill.style.transform = 'translateY(16px) scale(0.95)';
-                pill.style.transition = `opacity 0.5s ${i * 0.03}s, transform 0.5s ${i * 0.03}s cubic-bezier(0.25, 1, 0.5, 1)`;
-                setTimeout(() => {
-                    pill.style.opacity = '1';
-                    pill.style.transform = 'translateY(0) scale(1)';
-                }, 10);
-            });
-            skillsObserver.unobserve(entry.target);
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+            document.getElementById('menubar-time').textContent = now.toLocaleDateString('en-US', options);
         }
-    });
-}, { threshold: 0.2 });
-document.querySelectorAll('.skills-grid').forEach(g => skillsObserver.observe(g));
-</script>
+        updateTime();
+        setInterval(updateTime, 1000);
 
+        // Window dragging
+        let dragWindow = null;
+        let dragOffset = { x: 0, y: 0 };
+
+        function startDrag(e, windowId) {
+            dragWindow = document.getElementById(windowId);
+            const rect = dragWindow.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+
+            // Bring to front
+            document.querySelectorAll('.window').forEach(w => w.style.zIndex = '1');
+            dragWindow.style.zIndex = '100';
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (dragWindow) {
+                const x = e.clientX - dragOffset.x;
+                const y = e.clientY - dragOffset.y;
+                dragWindow.style.left = x + 'px';
+                dragWindow.style.top = y + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            dragWindow = null;
+        });
+
+        // Window controls
+        function closeWindow(windowId) {
+            document.getElementById(windowId).classList.add('hidden');
+        }
+
+        function toggleWindow(windowId) {
+            const win = document.getElementById(windowId);
+            win.classList.toggle('hidden');
+            if (!win.classList.contains('hidden')) {
+                document.querySelectorAll('.window').forEach(w => w.style.zIndex = '1');
+                win.style.zIndex = '100';
+            }
+        }
+
+        // Terminal animation
+        const terminalLines = [
+            { type: 'prompt', text: 'jan@apple ~ % ' },
+            { type: 'cmd', text: 'whoami' },
+            { type: 'output', text: 'Jan Lönnqvist — Graphic Designer & Illustrator' },
+            { type: 'output', text: '' },
+            { type: 'prompt', text: 'jan@apple ~ % ' },
+            { type: 'cmd', text: 'cat skills.txt' },
+            { type: 'output', text: '→ Adobe Creative Suite (Photoshop, Illustrator, InDesign)' },
+            { type: 'output', text: '→ Technical Illustration & Iconography' },
+            { type: 'output', text: '→ Instructional Design & Documentation' },
+            { type: 'output', text: '→ Design Systems & Brand Guidelines' },
+            { type: 'output', text: '→ Generative AI Tools' },
+            { type: 'output', text: '' },
+            { type: 'prompt', text: 'jan@apple ~ % ' },
+            { type: 'cmd', text: 'echo $WHY_APPLE' },
+            { type: 'highlight', text: '"Making the complex beautifully simple."' },
+            { type: 'output', text: '' },
+            { type: 'prompt', text: 'jan@apple ~ % ' },
+            { type: 'cmd', text: '_' }
+        ];
+
+        const terminal = document.getElementById('terminal');
+        let currentLine = 0;
+
+        function typeLine() {
+            if (currentLine >= terminalLines.length) return;
+
+            const line = terminalLines[currentLine];
+            const div = document.createElement('div');
+            div.className = 'terminal-line';
+            div.style.animationDelay = `${currentLine * 0.15}s`;
+
+            if (line.type === 'prompt') {
+                div.innerHTML = `<span class="terminal-prompt">${line.text}</span>`;
+            } else if (line.type === 'cmd') {
+                const lastDiv = terminal.lastElementChild;
+                if (lastDiv) {
+                    lastDiv.innerHTML += `<span class="terminal-cmd">${line.text}</span>`;
+                    currentLine++;
+                    setTimeout(typeLine, 300);
+                    return;
+                }
+            } else if (line.type === 'highlight') {
+                div.innerHTML = `<span class="terminal-highlight">${line.text}</span>`;
+            } else {
+                div.innerHTML = `<span class="terminal-output">${line.text}</span>`;
+            }
+
+            terminal.appendChild(div);
+            currentLine++;
+            setTimeout(typeLine, 300);
+        }
+
+        // Start terminal after delay
+        setTimeout(typeLine, 1500);
+
+        // Hide notification after 5 seconds
+        setTimeout(() => {
+            document.getElementById('notification').style.opacity = '0';
+            document.getElementById('notification').style.transform = 'translateX(100px)';
+        }, 6000);
+    </script>
 </body>
 </html>
