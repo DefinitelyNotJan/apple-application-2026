@@ -744,43 +744,35 @@
             </div>
             <div class="window-content">
                 <div class="exp-item">
+                    <div class="exp-icon">📦</div>
+                    <div class="exp-details">
+                        <div class="exp-title">Designer</div>
+                        <div class="exp-company">GLS Group</div>
+                        <div class="exp-date">2024 — Present</div>
+                    </div>
+                </div>
+                <div class="exp-item">
                     <div class="exp-icon">🥗</div>
                     <div class="exp-details">
-                        <div class="exp-title">Lead Designer</div>
+                        <div class="exp-title">Team Lead, Print Design</div>
                         <div class="exp-company">HelloFresh</div>
-                        <div class="exp-date">2023 — Present</div>
+                        <div class="exp-date">2021 — 2023</div>
                     </div>
                 </div>
                 <div class="exp-item">
-                    <div class="exp-icon">🚴</div>
-                    <div class="exp-details">
-                        <div class="exp-title">Senior Graphic Designer</div>
-                        <div class="exp-company">Delivery Hero</div>
-                        <div class="exp-date">2020 — 2023</div>
-                    </div>
-                </div>
-                <div class="exp-item">
-                    <div class="exp-icon">🍔</div>
+                    <div class="exp-icon">🎮</div>
                     <div class="exp-details">
                         <div class="exp-title">Art Director</div>
-                        <div class="exp-company">Wolt</div>
-                        <div class="exp-date">2018 — 2020</div>
+                        <div class="exp-company">Valve</div>
+                        <div class="exp-date">2019 — 2020</div>
                     </div>
                 </div>
                 <div class="exp-item">
-                    <div class="exp-icon">🎵</div>
+                    <div class="exp-icon">🖨️</div>
                     <div class="exp-details">
-                        <div class="exp-title">Visual Designer</div>
-                        <div class="exp-company">Spotify</div>
-                        <div class="exp-date">2016 — 2018</div>
-                    </div>
-                </div>
-                <div class="exp-item">
-                    <div class="exp-icon">📢</div>
-                    <div class="exp-details">
-                        <div class="exp-title">Graphic Designer</div>
-                        <div class="exp-company">DDB Worldwide</div>
-                        <div class="exp-date">2012 — 2016</div>
+                        <div class="exp-title">Production Designer</div>
+                        <div class="exp-company">Helsinki Studios</div>
+                        <div class="exp-date">2013 — 2018</div>
                     </div>
                 </div>
             </div>
@@ -902,13 +894,42 @@
     </div>
 
     <script>
-        // Disable right-click and dev tools
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'I')) {
-                e.preventDefault();
-            }
-        });
+        // Comprehensive code protection
+        (function(){
+            // Disable right-click
+            document.addEventListener('contextmenu', e => e.preventDefault());
+
+            // Disable keyboard shortcuts
+            document.addEventListener('keydown', e => {
+                if (e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                    (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) ||
+                    (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'U' || e.key === 'u'))) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Disable drag
+            document.addEventListener('dragstart', e => e.preventDefault());
+
+            // Detect devtools
+            const devtools = { open: false };
+            const threshold = 160;
+            setInterval(() => {
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    if (!devtools.open) {
+                        devtools.open = true;
+                        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#fff;font-family:system-ui;font-size:24px;">Nice try! 👀</div>';
+                    }
+                }
+            }, 500);
+
+            // Clear console
+            console.clear();
+            console.log('%cStop!', 'color:red;font-size:48px;font-weight:bold');
+            console.log('%cThis is a protected application.', 'font-size:18px');
+        })();
 
         // Update time
         function updateTime() {
